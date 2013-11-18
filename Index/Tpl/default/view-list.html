@@ -1,0 +1,52 @@
+<include file="Public:header" title=""/>
+<div class="wrapper">
+	<notempty name="list.pic">
+	<div class="banner">
+		<img src="__PUBLIC__/Images/slider/{$list.pic}" alt="{$list.name}" />
+	</div>
+	</notempty>
+
+	<div class="column left">
+	<b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b>
+		<div class="column_title">
+			<!-- <span>更多&gt;&gt;</span> -->
+			<h2>{$list.name}</h2>
+		</div>
+		<div class="column_box">
+			<ul class="list-list">
+			<volist name="list['child']" id="vo" empty="暂无分类~">
+				<li <if condition="$vo.id eq $article['parent_id'] or $vo.id eq $article[0]['parent_id']"> class="current"</if>><a href="__URL__/{$list.action}/id/{$vo.id}" title="{$vo.name}">{$vo.name}</a></li>
+			</volist>
+			</ul>
+		</div>
+	</div>
+	<if condition="$islist neq true">
+	<div class="column right">
+	<b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b>
+		<div class="column_title">
+			<!-- <span>更多&gt;&gt;</span> -->
+			<h2>{$article.title}</h2>
+		</div>
+		<div class="column_box">
+			{$article.content}
+		</div>
+	</div>	
+	<else />
+	<div class="column right">
+	<b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b>
+		<div class="column_title">
+			&nbsp;&nbsp;当前位置：<a href="__APP__">首页</a>&nbsp;&gt;&nbsp;<a href="__URL__">行业动态</a>
+			<!-- <span>更多&gt;&gt;</span> 
+			<h2>{$list.name}</h2> -->
+		</div>
+		<div class="column_box">
+			<ul class="news">
+				<volist name="article" id="vo" empty="暂无内容~">
+				<li><span>{$vo.createtime|substr=0,10}</span><a href="__URL__/view/id/{$vo.id}" title="{$vo.title}">{$vo.title}</a></li>
+				</volist>
+			</ul>		
+		</div>
+	</div>	
+	</if>
+</div>
+<include file="Public:footer" title=""/>
